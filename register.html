@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>二手商城</title>
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+<script src="js/jquery.min.js"></script>
+<script src="js/global.js"></script>
+	<style>
+		input{
+			width: 50%;
+		}
+		#submit{
+			background: #F97E76;
+			color: #FFF;
+			font-size: 1em;
+			padding: 0.5em 1.2em;
+			transition: 0.5s all;
+			-webkit-transition: 0.5s all;
+			-moz-transition: 0.5s all;
+			-o-transition: 0.5s all;
+			display: inline-block;
+			text-transform: uppercase;
+			border: none;
+			outline: none;
+			width: 150px;
+			height: 40px;
+		}
+		.error{
+			color: red;
+			display: none;
+		}
+	</style>
+</head>
+<body> 
+	<!--header-->
+	<div class="header">
+		<div class="bottom-header">
+			<div class="container">
+				<div class="header-bottom-left">
+					<div class="logo">
+						<a href="index.html"><img src="images/logo.png" alt=""/></a>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+				<div class="header-bottom-right">
+					<ul class="login" style="margin-left: 30px">
+						<li><a href="login.html"><span> </span>登陆</a></li> |
+						<li ><a href="register.html">注册</a></li>
+					</ul>
+					<div class="clearfix"> </div>
+				</div>
+				<div class="clearfix"> </div>	
+			</div>
+		</div>
+	</div>
+	<!---->
+	<div class="container">
+		<div class="register">
+			<form>
+				<div class="  register-top-grid">
+					<h3>个人信息</h3>
+					<div class="mation">
+						<span>用户名<label>*</label><label class="error name">用户名不能为空</label></span>
+						<input type="text" id="name"/>
+						<span>手机号<label>*</label><label class="error account1">手机号不能为空</label></span>
+						<input type="text" id = "account1">
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+				<div class="  register-bottom-grid">
+					<h3>登陆信息</h3>
+					<div class="mation">
+						<span>密码<label>*</label><label class="error password"></label></span>
+						<input type="text" id="password">
+						<span>请再次输入密码<label>*</label></span>
+						<input type="text" id="confirmPassword">
+					</div>
+				</div>
+			</form>
+			<div class="clearfix"> </div>
+			<div class="register-but">
+					<button id="submit">注册</button>
+			</div>
+		</div>
+		<div class="sub-cate">
+			<div class=" top-nav rsidebar span_1_of_left">
+				<h3 class="cate">商品分类</h3>
+				<ul class="menu">
+					<li>
+						<ul class="kid-menu">
+
+						</ul>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="clearfix"> </div>
+	</div>
+	<!---->
+	<div class="footer">
+		2018@南京邮电大学 B14041536
+	</div>
+</body>
+<script>
+	$(function () {
+	    getCateList();
+        $("#name").click(function () {
+            $(".name").hide();
+        })
+        $("#account1").click(function () {
+            $(".account1").hide();
+        })
+        $("#password").click(function () {
+            $(".password").hide();
+        })
+        $("#confirmPassword").click(function () {
+            $(".password").hide();
+        })
+		$("#submit").click(function () {
+            var name = $("#name").val();
+            var account = $("#account1").val();
+            var password = $("#password").val();
+            var confirmPassword = $("#confirmPassword").val();
+			if(vaild(name)){
+			    $(".name").show();
+			    return false;
+			}
+            if(vaild(account)){
+                $(".account1").show();
+                return false;
+            }
+            if(vaild(password)){
+                $(".password").text("密码不能为空");
+                $(".password").show();
+                return false;
+			}
+			if(password != confirmPassword){
+                $(".password").text("两次输入密码不同");
+                $(".password").show();
+                return false;
+            }
+            $.ajax({
+                url: host+"/user/register",
+                data: {
+                    name: name,
+                    account:account,
+                    password:password
+                },
+				dataType:"json",
+                type:'post',
+                success: function (data) {
+                    if (data.code == 0) {
+						window.location.href = "login.html";
+                    } else {
+                        alert(data.msg)
+                    }
+                }
+            });
+        })
+    })
+	function vaild(arg) {
+		if(arg==null||arg==""){
+		    return true;
+		}else {
+		    return false;
+		}
+    }
+
+    function getCateList() {
+        $.ajax({
+            url: host+"/user/getGoodCateList",
+            data: {
+            },
+            dataType:"json",
+            type:'post',
+            success: function (data) {
+                if (data.code == 0) {
+                    var goodsCateList = data.data.goodsCateList;
+					for(var i=0;i<goodsCateList.length;i++){
+					    $(".kid-menu").append("<li><a href='product.html?id="+goodsCateList[i].pkId+"'>"+goodsCateList[i].name+"</a></li>");
+					}
+                } else {
+                    alert(data.msg)
+                }
+            }
+        });
+    }
+</script>
+</html>

@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>二手商城</title>
+<link href="css/bootstrap.css" rel="stylesheet" type="text/css" media="all" />
+<link href="css/style.css" rel="stylesheet" type="text/css" media="all" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700,800' rel='stylesheet' type='text/css'>
+<script src="js/jquery.min.js"></script>
+<script src="js/jquery.cookie.js"></script>
+<script src="js/global.js"></script>
+	<style>
+		#login{
+			display: none;
+		}
+		.product_l{
+			border-right:1px solid gainsboro;
+			border-bottom:1px solid gainsboro;
+			width: 30%;
+			margin: 1%;
+		}
+		.dolor-grid{
+			float: right;
+		}
+		.form-l{
+			background: #F97E76;
+			color: #FFF;
+			font-size: 1em;
+			padding: 0.5em 1.2em;
+			transition: 0.5s all;
+			-webkit-transition: 0.5s all;
+			-moz-transition: 0.5s all;
+			-o-transition: 0.5s all;
+			display: inline-block;
+			text-transform: uppercase;
+			border: none;
+			outline: none;
+			width: 120px;
+			height: 40px;
+			display: none;
+		}
+	</style>
+</head>
+<body> 
+	<!--header-->
+	<div class="header">
+		<div class="bottom-header">
+			<div class="container">
+				<div class="header-bottom-left">
+					<div class="logo">
+						<a href="index.html"><img src="images/logo.png" alt=" " /></a>
+					</div>
+					<div class="clearfix"> </div>
+				</div>
+				<div class="header-bottom-right">
+					<ul class="login" style="margin-left: 30px" id="noLogin">
+						<li><a href="login.html"><span> </span>登陆</a></li> |
+						<li ><a href="register.html">注册</a></li>
+					</ul>
+					<ul class="login" style="margin-left: 30px;width: 300px;" id="login">
+						<a href="publish.html"><button  class="form-l">提交商品</button></a>
+						<li ><span id="account1"></span></li> |
+						<li class="loginOut">LoginOut</li>
+					</ul>
+					<div class="clearfix"> </div>
+				</div>
+				<div class="clearfix"> </div>	
+			</div>
+		</div>
+	</div>
+	<!---->
+	<div class="container">
+		<div class="shoes-grid">
+			<!--banner-->
+			<div class="wrap-in">
+				<div class="wmuSlider example1 slide-grid">
+					<div class="wmuSliderWrapper" style="min-height: 800px;">
+						<article style="position: absolute; width: 100%; opacity: 0;">
+							<div class="banner-matter">
+								<div class="col-md-5 banner-bag">
+									<img class="img-responsive " src="image/index3.jpg" alt=" "  style="height: 371px"/>
+								</div>
+								<div class="col-md-7 banner-off">
+									<label>各式各<b>Young</b></label>
+									<p>———— 总有你喜欢</p>
+								</div>
+
+								<div class="clearfix"> </div>
+							</div>
+						</article>
+						<article style="position: absolute; width: 100%; opacity: 0;">
+							<div class="banner-matter">
+								<div class="col-md-5 banner-bag">
+									<img class="img-responsive " src="image/index1.jpg" alt=" " />
+								</div>
+								<div class="col-md-7 banner-off">
+									<label>物超所 <b>值</b></label>
+									<p>———— 不只是便宜</p>
+								</div>
+
+								<div class="clearfix"> </div>
+							</div>
+
+						</article>
+						<article style="position: absolute; width: 100%; opacity: 0;">
+							<div class="banner-matter">
+								<div class="col-md-5 banner-bag">
+									<img class="img-responsive " src="image/index2.jpg" alt=" " />
+								</div>
+								<div class="col-md-7 banner-off">
+									<label><b>旧</b>物<b>利</b>用</label>
+									<p>———— 节能用环保，你还在等什么 Join us！</p>
+								</div>
+
+								<div class="clearfix"> </div>
+							</div>
+
+						</article>
+
+
+					</div>
+					<ul class="wmuSliderPagination">
+						<li><a href="#" class="">0</a></li>
+						<li><a href="#" class="">1</a></li>
+						<li><a href="#" class="">2</a></li>
+					</ul>
+
+				</div>
+			</div>
+			<!--banner-->
+
+
+			<div class="product-left">
+			</div>
+
+			<div class="clearfix"> </div>
+		</div>
+
+
+		<div class="sub-cate">
+			<div class=" top-nav rsidebar span_1_of_left">
+				<h3 class="cate">商品分类</h3>
+				<ul class="menu">
+					<li>
+						<ul class="kid-menu">
+
+						</ul>
+					</li>
+				</ul>
+			</div>
+			<!--initiate accordion-->
+			<script type="text/javascript">
+                $(function() {
+                    var menu_ul = $('.menu > li > ul'),
+                        menu_a  = $('.menu > li > a');
+                    menu_ul.hide();
+                    menu_a.click(function(e) {
+                        e.preventDefault();
+                        if(!$(this).hasClass('active')) {
+                            menu_a.removeClass('active');
+                            menu_ul.filter(':visible').slideUp('normal');
+                            $(this).addClass('active').next().stop(true,true).slideDown('normal');
+                        } else {
+                            $(this).removeClass('active');
+                            $(this).next().stop(true,true).slideUp('normal');
+                        }
+                    });
+
+                });
+			</script>
+		</div>
+		<div class="clearfix"> </div>
+	</div>
+
+</body>
+<script>
+	$(function () {
+        getCateList();
+        getGoodsList();
+	    var account = jQuery.cookie("account");
+        var name = jQuery.cookie("name");
+		if(account!=null&&account!="unidentified"&&account!=""){
+            $(".login").hide();
+		    $("#account1").text("您好,"+name);
+		    $("#login").show();
+		    var publish = jQuery.cookie("publish");
+            if(publish == 1){
+                $(".form-l").show();
+            }
+		}
+		$(".loginOut").click(function () {
+            jQuery.removeCookie("account");
+            window.location.reload();
+        })
+    })
+    function getCateList() {
+        $.ajax({
+            url: host+"/user/getGoodCateList",
+            data: {
+            },
+            dataType:"json",
+            type:'post',
+            success: function (data) {
+                if (data.code == 0) {
+                    var goodsCateList = data.data.goodsCateList;
+                    for(var i=0;i<goodsCateList.length;i++){
+                        $(".kid-menu").append("<li><a href='index.html?id="+goodsCateList[i].pkId+"'>"+goodsCateList[i].name+"</a></li>");
+                    }
+                } else {
+                    alert(data.msg)
+                }
+            }
+        });
+    }
+
+    function getGoodsList() {
+	    var cateId = getQueryString("id");
+        if(cateId==null||cateId=="unidentified"||cateId==""){
+            cateId = 1;
+        }else {
+            $(".wrap-in").hide();
+		}
+        $.ajax({
+            url: host+"/user/getGoodsList",
+            data: {
+                cateId:cateId
+            },
+            dataType:"json",
+            type:'post',
+            success: function (data) {
+                if (data.code == 0) {
+                    var goodsList = data.data.goodsList;
+                    for(var i=0;i<goodsList.length;i++){
+                        $(".product-left").append('<div class="col-md-4 product_l"><a href="single.html?id='+goodsList[i].pkId+'"><img class="img-responsive chain" src="'+goodsList[i].image+'" alt=" " /></a><div class="grid-chain-bottom"><h6><a href="single.html?id='+goodsList[i].pkId+'">'+goodsList[i].name+'</a></h6><div class="star-price"><div class="dolor-grid"><span class="actual">'+goodsList[i].price+'元</span><span class="reducedfrom">'+goodsList[i].price*2+'元</span><div class="clearfix"> </div></div> </div> </div></div>');
+                    }
+                } else {
+                    alert(data.msg)
+                }
+            }
+        });
+    }
+
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+    }
+</script>
+<script src="js/jquery.wmuSlider.js"></script>
+<script>
+    $('.example1').wmuSlider();
+</script>
+<!--initiate accordion-->
+<script type="text/javascript">
+    $(function() {
+        var menu_ul = $('.menu > li > ul'),
+            menu_a  = $('.menu > li > a');
+        menu_ul.hide();
+        menu_a.click(function(e) {
+            e.preventDefault();
+            if(!$(this).hasClass('active')) {
+                menu_a.removeClass('active');
+                menu_ul.filter(':visible').slideUp('normal');
+                $(this).addClass('active').next().stop(true,true).slideDown('normal');
+            } else {
+                $(this).removeClass('active');
+                $(this).next().stop(true,true).slideUp('normal');
+            }
+        });
+
+    });
+
+</script>
+</html>
